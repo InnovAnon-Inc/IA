@@ -57,9 +57,10 @@ workflows:
       #        ignore:
       #          - gh-pages
       #          - mvn-repo
-      - test:
+      #- test:
       #    requires:
       #      - cache
+      - test
       - site:
           requires:
             - test
