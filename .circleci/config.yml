@@ -14,46 +14,52 @@ version: 2.1
 #        - mvn-repo
 
 jobs:
-  cache:
+  #cache:
+  #  docker:
+  #    - image: circleci/openjdk:stretch
+  #  steps:
+  #    - checkout
+  #    - run: |
+  #        echo -e "$GPG_KEY" | gpg --import
+  #        mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+  test:
     docker:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
       - run: |
           echo -e "$GPG_KEY" | gpg --import
-          mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
-  test:
-    docker:
-      - image: circleci/openjdk:stretch
-    steps:
-      - checkout
-      - run: mvn -X verify
+          mvn -X verify
   site:
     docker:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
-      - run: mvn -X -DskipTests site
+      - run: |
+          echo -e "$GPG_KEY" | gpg --import
+          mvn -X -DskipTests site
   deploy:
     docker:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
-      - run: mvn -X -DskipTests deploy
+      - run: |
+          echo -e "$GPG_KEY" | gpg --import
+          mvn -X -DskipTests deploy
 
 workflows:
   version: 2.0
   do_everything:
     jobs:
-      - cache:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
-                - mvn-repo
+      #- cache:
+      #    filters:
+      #      branches:
+      #        ignore:
+      #          - gh-pages
+      #          - mvn-repo
       - test:
-          requires:
-            - cache
+      #    requires:
+      #      - cache
       - site:
           requires:
             - test
