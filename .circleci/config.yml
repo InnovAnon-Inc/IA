@@ -8,24 +8,24 @@ workflows:
     jobs:
       - maven/test: # checkout, build, test, and upload test results
           command: '-X verify'
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+    branches:
+      ignore:
+        - gh-pages
+        - mvn-repo
   maven_site:
     jobs:
       - maven/site:
           command: '-X site'
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+    branches:
+      ignore:
+        - gh-pages
+        - mvn-repo
   maven_deploy:
     jobs:
       - maven/deploy:
           command: '-X deploy'
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+    branches:
+      ignore:
+        - gh-pages
+        - mvn-repo
 
