@@ -264,8 +264,8 @@
 					<execution>
 						<id>gh-pages</id>
 						<configuration>
-							<description>Docs ${project.name} build, ${project.version} release [ci skip]</description>
-							<message>Official ${project.name} build</message>
+							<description>Docs ${project.name} build, ${project.version} release</description>
+							<message>Official ${project.name} build [ci skip]</message>
 							<server>github</server>
 							<path>${site.path}</path>
 							<!-- Use merge or override the content -->
@@ -279,7 +279,8 @@
 					<execution>
 						<id>mvn-repo</id>
 						<configuration>
-							<message>Repo ${project.name} build, ${project.version} release [ci skip]</message> <!-- git commit message -->
+							<description>Repo ${project.name} build, ${project.version} release</description> <!-- git commit message -->
+							<message>Official ${project.name} build [ci skip]</message>
 							<noJekyll>true</noJekyll>  <!-- disable webpage processing -->
 							<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
 							<branch>refs/heads/mvn-repo</branch> <!-- remote branch name -->
