@@ -60,11 +60,26 @@ workflows:
       #- test:
       #    requires:
       #      - cache
-      - test
+      - test:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - mvn-repo
       - site:
           requires:
             - test
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - mvn-repo
       - deploy:
           requires:
             - test
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+                - mvn-repo
 
