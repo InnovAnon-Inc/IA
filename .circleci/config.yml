@@ -44,29 +44,31 @@ workflows:
   do_everything:
     jobs:
       - cache:
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+          # circleci documentation is always wrong, but third-party servers building extraneous branches in infinite loops isn't really our problem
+          # https://discuss.circleci.com/t/excluding-a-branch-from-ci/17811/3
+          #branches:
+          #  ignore:
+          #    - gh-pages
+          #    - mvn-repo
       - test:
           requires:
             - cache
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+          #branches:
+          #  ignore:
+          #    - gh-pages
+          #    - mvn-repo
       - site:
           requires:
             - test
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+          #branches:
+          #  ignore:
+          #    - gh-pages
+          #    - mvn-repo
       - deploy:
           requires:
             - test
-          branches:
-            ignore:
-              - gh-pages
-              - mvn-repo
+          #branches:
+          #  ignore:
+          #    - gh-pages
+          #    - mvn-repo
 
