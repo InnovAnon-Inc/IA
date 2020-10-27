@@ -40,13 +40,13 @@ workflows:
   cache_and_test:
     jobs:
       - cache
-      - test
+      - test:
           requires:
             - cache
-      - site
+      - site:
           requires:
             - test
-      - deploy
+      - deploy:
           requires:
             - test
 
