@@ -15,22 +15,18 @@ version: 2.1
 
 jobs:
   cache:
-    branch: master
     steps:
       - checkout
       - run: mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
   test:
-    branch: master
     steps:
       - checkout
       - run: mvn -X verify
   site:
-    branch: master
     steps:
       - checkout
       - run: mvn -X -DskipTests site
   deploy:
-    branch: master
     steps:
       - checkout
       - run: mvn -X -DskipTests deploy
@@ -49,4 +45,8 @@ workflows:
       - deploy:
           requires:
             - test
+    branches:
+      ignore:
+        - gh-pages
+        - mvn-repo
 
