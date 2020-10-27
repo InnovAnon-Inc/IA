@@ -19,7 +19,9 @@ jobs:
       - image: circleci/openjdk:stretch
     steps:
       - checkout
-      - run: mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+      - run: |
+          echo "$GPG_KEY" | gpg --import-secret-key
+          mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
   test:
     docker:
       - image: circleci/openjdk:stretch
