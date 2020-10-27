@@ -257,7 +257,7 @@
 				<artifactId>site-maven-plugin</artifactId>
 				<version>0.12</version>
 				<configuration>
-					<repositoryName>SimpleJavaPrograms</repositoryName>
+					<repositoryName>IA</repositoryName>
 					<repositoryOwner>InnovAnon-Inc</repositoryOwner>
 				</configuration>
 				<executions>
