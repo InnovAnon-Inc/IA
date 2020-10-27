@@ -13,27 +13,40 @@ version: 2.1
 #        - gh-pages
 #        - mvn-repo
 
-workflows:
-  dependencies:
+jobs:
+  cache:
     branch: master
-    override:
-      - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
-
+    steps:
+      - checkout
+      - run: mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
   test:
     branch: master
-    override:
-      - mvn -X verify
-      #- mvn -o surefire:test
-
-  deployment:
-    main:
-      branch: master
-      commands:
-        - mvn -DskipTests deploy
-
+    steps:
+      - checkout
+      - run: mvn -X verify
   site:
-    main:
-      branch: master
-      commands:
-        - mvn -DskipTests site
+    branch: master
+    steps:
+      - checkout
+      - run: mvn -X -DskipTests site
+  deploy:
+    branch: master
+    steps:
+      - checkout
+      - run: mvn -X -DskipTests deploy
+
+workflows:
+  version: 2.1
+  cache_and_test:
+    jobs:
+      - cache
+      - test
+          requires:
+            - cache
+      - site
+          requires:
+            - test
+      - deploy
+          requires:
+            - test
 
