@@ -43,17 +43,30 @@ workflows:
   version: 2.0
   do_everything:
     jobs:
-      - cache
+      - cache:
+          branches:
+            ignore:
+              - gh-pages
+              - mvn-repo
       - test:
           requires:
             - cache
+          branches:
+            ignore:
+              - gh-pages
+              - mvn-repo
       - site:
           requires:
             - test
+          branches:
+            ignore:
+              - gh-pages
+              - mvn-repo
       - deploy:
           requires:
             - test
-    ignore:
-      - gh-pages
-      - mvn-repo
+          branches:
+            ignore:
+              - gh-pages
+              - mvn-repo
 
