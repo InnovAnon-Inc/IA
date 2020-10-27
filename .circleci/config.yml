@@ -41,7 +41,7 @@ jobs:
 
 workflows:
   version: 2.0
-  cache_and_test:
+  do_everything:
     jobs:
       - cache
       - test:
@@ -53,7 +53,6 @@ workflows:
       - deploy:
           requires:
             - test
-  branches:
     ignore:
       - gh-pages
       - mvn-repo
