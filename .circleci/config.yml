@@ -1,31 +1,38 @@
 version: 2.1
 
-orbs:
-  maven: circleci/maven@1.0.3
+#orbs:
+#  maven: circleci/maven@1.0.3
+#
+#workflows:
+#  parallel_test:
+#    jobs:
+#      - maven/test: # checkout, build, test, and upload test results
+#          command: '-X verify'
+#    branches:
+#      ignore:
+#        - gh-pages
+#        - mvn-repo
 
-workflows:
-  maven_test:
-    jobs:
-      - maven/test: # checkout, build, test, and upload test results
-          command: '-X verify'
-    branches:
-      ignore:
-        - gh-pages
-        - mvn-repo
-  maven_site:
-    jobs:
-      - maven/site:
-          command: '-X site'
-    branches:
-      ignore:
-        - gh-pages
-        - mvn-repo
-  maven_deploy:
-    jobs:
-      - maven/deploy:
-          command: '-X deploy'
-    branches:
-      ignore:
-        - gh-pages
-        - mvn-repo
+dependencies:
+  branch: master
+  override:
+    - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+
+test:
+  branch: master
+  override:
+    - mvn -X verify
+    #- mvn -o surefire:test
+
+deployment:
+  main:
+    branch: master
+    commands:
+      - mvn -DskipTests deploy
+
+site:
+  main:
+    branch: master
+    commands:
+      - mvn -DskipTests site
 
