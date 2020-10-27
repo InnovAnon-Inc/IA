@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo "$GPG_KEY" | gpg --import-secret-key
+          echo -e "$GPG_KEY" | gpg --import
           mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
   test:
     docker:
