@@ -10,7 +10,8 @@
 	<name>InnovAnon</name>
 	<description>InnovAnon, Inc. (Ministries) Corporate Parent POM for Maven</description>
 	<!--<url>https://InnovAnon-Inc.github.io/SimpleJavaPrograms</url>-->
-	<url>https://github.com/InnovAnon-Inc/IA</url>
+	<!--<url>https://github.com/InnovAnon-Inc/IA</url>-->
+	<url>${project.organization.url}/${repo.name}</url>
 	<inceptionYear>2010</inceptionYear>
 
 	<!-- https://mvnrepository.com/artifact/org.sonatype.oss/oss-parent -->
@@ -24,7 +25,7 @@
 	
 	<organization>
 		<name>InnovAnon, Inc. (Ministries)</name>
-		<url>https://InnovAnon-Inc.github.io</url>
+		<url>https://${repo.user}.github.io</url>
 	</organization>
 
 	<developers>
@@ -77,20 +78,20 @@
 	-->
 	
 	<scm>
-		<connection>scm:git:git@github.com:InnovAnon-Inc/IA.git</connection>
-		<developerConnection>scm:git:https://github.com/InnovAnon-Inc/IA.git</developerConnection>
-		<url>https://github.com/InnovAnon-Inc/IA</url>
+		<connection>scm:git:git@github.com:${repo.user}/${repo.name}.git</connection>
+		<developerConnection>scm:git:https://github.com/${repo.user}/${repo.name}.git</developerConnection>
+		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
 		<system>Github Issues</system>
-		<url>https://github.com/InnovAnon-Inc/IA/issues</url>
+		<url>https://github.com/${repo.user}/${repo.name}/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>CircleCI</system>
-		<url>https://app.circleci.com/pipelines/github/InnovAnon-Inc/IA</url>
+		<url>https://app.circleci.com/pipelines/github/${repo.user}/${repo.name}</url>
 		<notifiers>
 			<notifier>
 				<address>InnovAnon-Inc@protonmail.com</address>
@@ -131,6 +132,11 @@
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
 		
+		<site>
+			<id>internal.site</id>
+			<name>Temporary Staging Site</name>
+			<url>file://${project.build.directory}/gh-pages</url>
+		</site>
 		<!--
 		<site>
 			<id>${project.artifactId}-site</id>
@@ -147,6 +153,9 @@
     </distributionManagement>
 
 	<properties>
+		<repo.user>InnovAnon-Inc</repo.user>
+		<repo.name>IA</repo.name>
+		
 		<detail>false</detail>
 		<verbose>true</verbose>
 		<debug>false</debug>
@@ -168,17 +177,28 @@
 
 		<gmavenplus-plugin.version>1.11.0</gmavenplus-plugin.version>
 		<maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-		<maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-		<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
-		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-
-		<maven-site-plugin.version>3.7.1</maven-site-plugin.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		
+		<site-maven-plugin.version>0.12</site-maven-plugin.version>
+		<maven-site-plugin.version>3.9.1</maven-site-plugin.version>
+		<doxia-module-markdown.version>1.9.1</doxia-module-markdown.version>
+		<maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+		<maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
+		<required-maven.version>3.6.0</required-maven.version>
+		<maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
+		<versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+		
+		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+		<maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+		
 		<commons-lang3.version>3.8</commons-lang3.version>
 		<doxia-site-renderer.version>1.8.1</doxia-site-renderer.version>
 
-		<maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
-		<maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
-		<maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
+		<maven-project-info-reports-plugin.version>3.1.1</maven-project-info-reports-plugin.version>
+		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+		<maven-jxr-plugin.version>3.0.0</maven-jxr-plugin.version>
 		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
 		<maven-clover2-plugin.version>4.0.6</maven-clover2-plugin.version>
 		<maven-pmd-plugin.version>3.10.0</maven-pmd-plugin.version>
@@ -281,30 +301,12 @@
 				<inherited>true</inherited>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.12</version>
+				<version>${site-maven-plugin.version}</version>
 				<configuration>
-					<repositoryName>IA</repositoryName>
-					<repositoryOwner>InnovAnon-Inc</repositoryOwner>
+					<repositoryOwner>${repo.user}</repositoryOwner>
+					<repositoryName>${repo.name}</repositoryName>
 				</configuration>
 				<executions>
-					
-					<execution>
-						<id>gh-pages</id>
-						<configuration>
-							<description>[ci skip] Docs ${project.name} build, ${project.version} release</description>
-							<message>[ci skip] Official ${project.name} build</message>
-							<server>github</server>
-							<path>${site.path}</path>
-							<!-- this does the trick to place every module in the correct subfolder -->
-							<!--<path>${project.distributionManagement.site.url}</path>-->
-							<!-- Use merge or override the content -->
-							<merge>false</merge>
-						</configuration>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<phase>site</phase>
-					</execution>
 					
 					<execution>
 						<id>mvn-repo</id>
@@ -321,6 +323,23 @@
 							<goal>site</goal>
 						</goals>
 						<phase>deploy</phase>
+					</execution>
+					
+					<execution>
+						<id>gh-pages</id>
+						<configuration>
+							<description>[ci skip] Repo ${project.name} build, ${project.version} release</description> <!-- git commit message -->
+							<message>[ci skip] Official ${project.name} build</message>
+							<noJekyll>false</noJekyll>  <!-- enable webpage processing -->
+							<outputDirectory>${project.build.directory}/gh-pages</outputDirectory> <!-- matches distribution management repository url above -->
+							<branch>refs/heads/gh-pages</branch> <!-- remote branch name -->
+							<includes><include>**/*</include></includes>
+							<merge>true</merge>
+						</configuration>
+						<goals>
+							<goal>site</goal>
+						</goals>
+						<phase>site-deploy</phase>
 					</execution>
 					
 				</executions>
@@ -352,7 +371,7 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.9.1</version>
+				<version>${maven-site-plugin.version}</version>
 				<!--<configuration>
 					<skipDeploy>true</skipDeploy>
 				</configuration>-->
@@ -364,7 +383,7 @@
 						-->
 						<groupId>org.apache.maven.doxia</groupId>
 						<artifactId>doxia-module-markdown</artifactId>
-						<version>1.9.1</version>
+						<version>${doxia-module-markdown.version}</version>
 					</dependency>
 					<!--
 					<dependency>
@@ -380,7 +399,7 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>3.0.0-M1</version>
+				<version>${maven-deploy-plugin.version}</version>
 				<configuration>
 					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
 				</configuration>
@@ -429,7 +448,7 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.0.0-M2</version>
+				<version>${maven-enforcer-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>enforce-maven-3</id>
@@ -439,7 +458,7 @@
 						<configuration>
 							<rules>
 								<requireMavenVersion>
-									<version>3.6.0</version>
+									<version>${required-maven.version}</version>
 								</requireMavenVersion>
 							</rules>
 							<fail>true</fail>
@@ -447,8 +466,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			
 			
 			<!-- install plugin -->
 			<!-- release plugin -->
@@ -475,6 +492,35 @@
 					</execution>
 				</executions> 
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<configuration>
+					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${versions-maven-plugin.version}</version>
+				<inherited>true</inherited>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven-clean-plugin.version}</version>
+				<inherited>true</inherited>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${maven-install-plugin.version}</version>
+				<inherited>true</inherited>
+			</plugin>
 		</plugins>
 	</build>
 	
@@ -484,7 +530,7 @@
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.5</version>
+				<version>${maven-project-info-reports-plugin.version}</version>
 				<reportSets>
 					<!--
 					<reportSet>
@@ -498,32 +544,46 @@
 					<reportSet>
 						<inherited>true</inherited>
 						<reports>
-							<report>index</report>
+							<report>ci-management</report>
 							<report>dependencies</report>
-							<report>project-team</report>
-							<report>mailing-list</report>
-							<report>cim</report>
-							<report>issue-tracking</report>
-							<report>license</report>
+							<report>dependency-convergence</report>
+							<report>dependency-info</report>
+							<report>dependency-management</report>
+							<report>distribution-management</report>
+							<report>index</report>
+							<report>issue-management</report>
+							<report>licenses</report>
+							<report>mailing-lists</report>
+							<!--<report>modules</report>-->
+							<report>plugin-management</report>
+							<report>team</report>
 							<report>scm</report>
+							<report>summary</report>
 						</reports>
 					</reportSet>
 				</reportSets>
 			</plugin>
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.3</version>
+				<version>${maven-jxr-plugin.version}</version>
 				<inherited>true</inherited>
+				<configuration>
+					<linkJavadoc>true</linkJavadoc>
+				<!--<javadocDir>/path/to/javadocs</javadocDir>--> <!-- same as destdir in javadoc plugin -->
+				</configuration>
+			<!--
 				<reportSets>
 					<reportSet>
 						<id>aggregate</id>
 						<inherited>false</inherited>
 						<reports>
 							<report>aggregate</report>
+							<report>test-aggregate</report>
 						</reports>
 					</reportSet>
-					<!--
+			-->		<!--
 					<reportSet>
 						<inherited>true</inherited>
 						<reports>
@@ -537,28 +597,48 @@
 						</reports>
 					</reportSet>
 					-->
-				</reportSets>
+			<!--	</reportSets>
+			-->
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
+				<version>${maven-javadoc-plugin.version}</version>
 				<configuration>
 					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
 				</configuration>
+				<!--
 				<reportSets>
-					<reportSet><!-- by default, id = "default" -->
+					<reportSet>
 						<inherited>true</inherited>
-						<reports><!-- select non-aggregate reports -->
+						<reports>
 							<report>javadoc</report>
 							<report>test-javadoc</report>
 						</reports>
 					</reportSet>
-					<reportSet><!-- aggregate reportSet, to define in poms having modules -->
+					<reportSet>
 						<id>aggregate</id>
-						<inherited>false</inherited><!-- don't run aggregate in child modules -->
+						<inherited>false</inherited>
 						<reports>
 							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+				-->
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${versions-maven-plugin.version}</version>
+				<inherited>true</inherited>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependency-updates-report</report>
+							<report>plugin-updates-report</report>
+							<report>property-updates-report</report>
 						</reports>
 					</reportSet>
 				</reportSets>
