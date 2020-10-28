@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>IA</name>
+	<name>InnovAnon</name>
 	<description>InnovAnon, Inc. (Ministries) Corporate Parent POM for Maven</description>
 	<!--<url>https://InnovAnon-Inc.github.io/SimpleJavaPrograms</url>-->
 	<url>https://github.com/InnovAnon-Inc/IA</url>
@@ -130,6 +130,20 @@
 			<name>Temporary Staging Repository</name>
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
+		
+		<!--
+		<site>
+			<id>${project.artifactId}-site</id>
+			<url>${project.baseUri}</url>
+		</site>
+		-->
+		<!--
+		<site>
+			<id>github-pages-site</id>
+			<name>Deployment through GitHub's site deployment plugin</name>
+			<url>${project.version}</url>
+		</site>
+		-->
     </distributionManagement>
 
 	<properties>
@@ -183,8 +197,9 @@
 		<!-- <maven.pmd.excludes>**/generated-sources/**</maven.pmd.excludes>-->
 	</properties>
 
-	<dependencies>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<!-- https://mvnrepository.com/artifact/junit/junit -->
+	<!--
+	<dependencies>	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -192,10 +207,12 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	-->
 
 	<build>
+		
 		<defaultGoal>deploy</defaultGoal>
+		
 		<plugins>
 			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
 			<plugin>
@@ -206,9 +223,11 @@
 				<configuration>
 					<archive>
 						<index>true</index>
+						<!--
 						<manifest>
 							<mainClass>${project.groupId}.${project.artifactId}.App</mainClass>
 						</manifest>
+						-->
 						<addMavenDescriptor>true</addMavenDescriptor>
 						<compress>true</compress>
 						<recompressAddedZips>true</recompressAddedZips>
@@ -238,6 +257,7 @@
 			</plugin>
 			
 			<!-- TODO -->
+			<!--
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -255,6 +275,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			
 			<plugin>
 				<inherited>true</inherited>
@@ -266,6 +287,7 @@
 					<repositoryOwner>InnovAnon-Inc</repositoryOwner>
 				</configuration>
 				<executions>
+					
 					<execution>
 						<id>gh-pages</id>
 						<configuration>
@@ -273,6 +295,8 @@
 							<message>[ci skip] Official ${project.name} build</message>
 							<server>github</server>
 							<path>${site.path}</path>
+							<!-- this does the trick to place every module in the correct subfolder -->
+							<!--<path>${project.distributionManagement.site.url}</path>-->
 							<!-- Use merge or override the content -->
 							<merge>false</merge>
 						</configuration>
@@ -281,6 +305,7 @@
 						</goals>
 						<phase>site</phase>
 					</execution>
+					
 					<execution>
 						<id>mvn-repo</id>
 						<configuration>
@@ -297,6 +322,7 @@
 						</goals>
 						<phase>deploy</phase>
 					</execution>
+					
 				</executions>
 			</plugin>
 			<!--
@@ -320,62 +346,34 @@
 				</executions>
 			</plugin>
 			-->
-			<!--
-			<plugin>
-				<groupId>cy.github</groupId>
-				<artifactId>github-release-plugin</artifactId>
-				<version>0.5.1</version>
-				<configuration>
-					<tagName>${project.version}</tagName>
-					<releaseTitle>${project.artifactId}-${project.version}</releaseTitle>
-					<serverId>github</serverId>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>gh-upload</goal>
-						</goals>
-					<phase>deploy</phase>
-					</execution>
-				</executions>
-			</plugin>
-			-->
+			
 			<!-- TODO -->
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.9.1</version>
-				<configuration>
-					<reportPlugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-project-info-reports-plugin</artifactId>
-							<version>2.5</version>
-							<reportSets>
-								<reportSet>
-									<id>aggregate</id>
-									<inherited>false</inherited>
-									<reports>
-										<report>aggregate</report>
-									</reports>
-								</reportSet>
-								<reportSet>
-									<inherited>true</inherited>
-									<reports>
-										<report>dependencies</report>
-										<report>project-team</report>
-										<report>mailing-list</report>
-										<report>cim</report>
-										<report>issue-tracking</report>
-										<report>license</report>
-										<report>scm</report>
-									</reports>
-								</reportSet>
-							</reportSets>
-						</plugin>
-					</reportPlugins>
-				</configuration>
+				<!--<configuration>
+					<skipDeploy>true</skipDeploy>
+				</configuration>-->
+				<dependencies>
+					<dependency>
+						<!--
+						| allows markdown syntax for site generation. To use it place files below
+						| src/site/markdown/[filename].md
+						-->
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.9.1</version>
+					</dependency>
+					<!--
+					<dependency>
+						<groupId>net.trajano.wagon</groupId>
+						<artifactId>wagon-git</artifactId>
+						<version>1.0.0</version>
+					</dependency>
+					-->
+				</dependencies>
 			</plugin>
 			
 			<plugin>
@@ -479,4 +477,92 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<inherited>true</inherited>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.5</version>
+				<reportSets>
+					<!--
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+					-->
+					<reportSet>
+						<inherited>true</inherited>
+						<reports>
+							<report>index</report>
+							<report>dependencies</report>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>cim</report>
+							<report>issue-tracking</report>
+							<report>license</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
+				<inherited>true</inherited>
+				<reportSets>
+					<reportSet>
+						<id>aggregate</id>
+						<inherited>false</inherited>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+					<!--
+					<reportSet>
+						<inherited>true</inherited>
+						<reports>
+							<report>dependencies</report>
+							<report>project-team</report>
+							<report>mailing-list</report>
+							<report>cim</report>
+							<report>issue-tracking</report>
+							<report>license</report>
+							<report>scm</report>
+						</reports>
+					</reportSet>
+					-->
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+				</configuration>
+				<reportSets>
+					<reportSet><!-- by default, id = "default" -->
+						<inherited>true</inherited>
+						<reports><!-- select non-aggregate reports -->
+							<report>javadoc</report>
+							<report>test-javadoc</report>
+						</reports>
+					</reportSet>
+					<reportSet><!-- aggregate reportSet, to define in poms having modules -->
+						<id>aggregate</id>
+						<inherited>false</inherited><!-- don't run aggregate in child modules -->
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
