@@ -133,7 +133,7 @@
 		</repository>
 		
 		<site>
-			<id>internal.site</id>
+			<id>${project.artifactId}-site</id>
 			<name>Temporary Staging Site</name>
 			<url>file://${project.build.directory}/gh-pages</url>
 		</site>
@@ -542,7 +542,6 @@
 					</reportSet>
 					-->
 					<reportSet>
-						<inherited>true</inherited>
 						<reports>
 							<report>ci-management</report>
 							<report>dependencies</report>
@@ -605,6 +604,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven-javadoc-plugin.version}</version>
+				<inherited>true</inherited>
 				<configuration>
 					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
 				</configuration>
