@@ -3,10 +3,9 @@
   <groupId>com.innovanon</groupId>
   <artifactId>ia</artifactId>
   <versioning>
-    <release>0.0.1</release>
     <versions>
-      <version>0.0.1</version>
+      <version>0.0.2-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20201031044845</lastUpdated>
+    <lastUpdated>20201031044902</lastUpdated>
   </versioning>
 </metadata>
