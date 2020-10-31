@@ -391,7 +391,7 @@
 						<encoding>${project.build.sourceEncoding}</encoding>
 						<release>${java.version}</release>
 						<jdkToolchain>
-						<version>${java.version}</version>
+							<version>${java.version}</version>
 						</jdkToolchain>
 						<debug>${debug}</debug>
 	<!--					<compilerArgs>

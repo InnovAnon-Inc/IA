@@ -1,3 +1,18 @@
+# machine-generated files used by the JVM
+*.class
+
+# java archives
+*.jar
+
+# machine-generated documentation
+doc/
+
+# IDE metadata
+package.bluej
+*.ctxt
+team.defs
+bluej.pkg
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
