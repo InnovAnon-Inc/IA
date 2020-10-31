@@ -7,8 +7,9 @@
 	    		<password>${env.GITHUB_API_PASSWORD}</password>
 		</server>
 		<server>
-			<id>your.keyname</id>
-			<passphrase></passphrase>
+			<id>gh-pages</id>
+			<username>git</username>
+			<password>${env.GITHUB_API_KEY}</password>
 		</server>
 	</servers>
 </settings>
