@@ -32,7 +32,7 @@ jobs:
       - checkout
       - run: |
           echo -e "$GPG_KEY" | gpg --import
-          mvn -e -s .circleci/settings.xml -DskipTests --batch clean compile release:prepare release:perform
+          mvn -e -s .circleci/settings.xml -DskipTests --batch release:clean release:prepare release:perform
 
 workflows:
   version: 2.0
