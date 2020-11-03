@@ -26,22 +26,29 @@
 	-->
 	<distributionManagement>
 		<!-- deploy our artifacts (e.g., pom.xml, *.jar) to special Github branch that can be used as a Maven repository -->
-		<!--
 		<repository>
 			<id>internal.repo</id>
 			<name>Temporary Staging Repository</name>
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
-		-->
+		
+		 <!-- here be fuckery -->
+		<!--
 		<repository>
 			<id>fuck</id>
 			<name>GitHub</name>
 			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
-			<!--<url>scm:git:ssh://git@maven.pkg.github.com/${repo.user}/${repo.name}.git</url>-->
-			<!--<url>https://maven.pkg.github.com/${repo.user}</url>-->
-			<!--<uniqueVersion>false</uniqueVersion>
-			<layout>default</layout>-->
+			<uniqueVersion>false</uniqueVersion>
+			<layout>default</layout>
         </repository>
+        -->
+        <!--
+		<repository>
+			<id>fuck</id>
+			<name>GitHub</name>
+			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
+		</repository>
+        -->
         <!--
         <snapshotRepository>
 			<id>github</id>
@@ -684,7 +691,7 @@
 					</executions>
 				  </plugin>
 				  -->
-				  <!--
+				  
 				  <plugin>
 					<inherited>true</inherited>
 					<groupId>com.github.github</groupId>
@@ -713,7 +720,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				-->
+			
 				<!--
 				<plugin>
 					<groupId>com.github.github</groupId>
