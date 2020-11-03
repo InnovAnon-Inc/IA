@@ -34,7 +34,7 @@
 		</repository>
 		-->
 		<repository>
-			<id>github</id>
+			<id>fuck</id>
 			<name>GitHub</name>
 			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
 			<!--<url>scm:git:ssh://git@maven.pkg.github.com/${repo.user}/${repo.name}.git</url>-->
