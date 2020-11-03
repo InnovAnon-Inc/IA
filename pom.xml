@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.10-SNAPSHOT</version>
+	<version>0.0.10</version>
 	<packaging>pom</packaging>
 
 	<!-- Projects are hosted on Github -->
@@ -15,7 +15,7 @@
 		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>ia-0.0.10</tag>
 	</scm>
 	
 	<!-- TODO:
@@ -36,8 +36,8 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub</name>
-			<!--<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>-->
-			<url>https://maven.pkg.github.com/${repo.user}</url>
+			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
+			<!--<url>https://maven.pkg.github.com/${repo.user}</url>-->
 			<!--<uniqueVersion>false</uniqueVersion>
 			<layout>default</layout>-->
         </repository>
@@ -245,6 +245,7 @@
 		<wagon-scm.version>3.4.0</wagon-scm.version>
 		<maven-scm-manager-plexus.version>1.11.2</maven-scm-manager-plexus.version>
 		<maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
+		<wagon-http.version>3.4.1</wagon-http.version>
 		<!-- TODO idk what I'm doing tbh -->
 		<!-- <maven.pmd.excludes>**/generated-sources/**</maven.pmd.excludes>-->
 	</properties>
@@ -756,6 +757,12 @@
 							<artifactId>maven-scm-manager-plexus</artifactId>
 							<version>${maven-scm-manager-plexus.version}</version>
 						</dependency>
+						
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-http</artifactId>
+							<version>${wagon-http.version}</version>
+						</dependency>
 					</dependencies>
 				</plugin>
 				
@@ -815,6 +822,12 @@
 				<groupId>org.apache.maven.scm</groupId>
 				<artifactId>maven-scm-provider-gitexe</artifactId>
 				<version>${maven-scm-provider-gitexe.version}</version>
+			</extension>
+			
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-http</artifactId>
+				<version>${wagon-http.version}</version>
 			</extension>
 		</extensions>
 		
