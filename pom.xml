@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.16</version>
+	<version>0.0.17-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- Projects are hosted on Github -->
@@ -15,7 +15,7 @@
 		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</developerConnection>
-		<tag>ia-0.0.16</tag>
+		<tag>HEAD</tag>
 	</scm>
 	
 	<!-- TODO:
