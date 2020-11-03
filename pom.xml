@@ -4,8 +4,66 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.0.7</version>
 	<packaging>pom</packaging>
+
+	<!-- Projects are hosted on Github -->
+	<scm>
+		<!--<connection>scm:git:git@github.com:${repo.user}/${repo.name}.git</connection>-->
+		<!--<connection>scm:git:https://github.com/${repo.user}/${repo.name}.git</connection>
+		<developerConnection>scm:git:https://github.com/${repo.user}/${repo.name}.git</developerConnection>-->
+		<url>https://github.com/${repo.user}/${repo.name}</url>
+		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</developerConnection>
+		<tag>ia-0.0.7</tag>
+	</scm>
+	
+	<!-- TODO:
+	     - master branch: mainline development
+	     - gh-pages: release documentation
+	     - mvn-repo: release maven repo
+	     - github release: standalone pom, jar with deps (lib) or executable jar with deps
+	-->
+	<distributionManagement>
+		<!-- deploy our artifacts (e.g., pom.xml, *.jar) to special Github branch that can be used as a Maven repository -->
+		<!--
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+		-->
+		<repository>
+			<id>github</id>
+			<name>GitHub</name>
+			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
+			<uniqueVersion>false</uniqueVersion>
+			<layout>default</layout>
+        </repository>
+        <!--
+        <snapshotRepository>
+			<id>github</id>
+			<name>GitHub</name>
+			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
+			<uniqueVersion>false</uniqueVersion>
+			<layout>default</layout>
+        </snapshotRepository>
+        -->
+        <!-- deploy our site (e.g., javadocs) to special Github branch used to host static web content (e.g., .html and .js, but no .php) -->
+        <site>
+			<id>gh-pages</id>
+			<name>Github</name>
+			<url>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</url>
+		</site>
+    </distributionManagement>
+    <!--
+    <repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+    </repositories>
+	-->
 
 	<name>InnovAnon</name>
 	<description>InnovAnon, Inc. (Ministries) Corporate Parent POM for Maven</description>
@@ -74,17 +132,6 @@
 		</mailingList>
 	</mailingLists>
 	-->
-	
-	<!-- Projects are hosted on Github -->
-	<scm>
-		<!--<connection>scm:git:git@github.com:${repo.user}/${repo.name}.git</connection>-->
-		<!--<connection>scm:git:https://github.com/${repo.user}/${repo.name}.git</connection>
-		<developerConnection>scm:git:https://github.com/${repo.user}/${repo.name}.git</developerConnection>-->
-		<url>https://github.com/${repo.user}/${repo.name}</url>
-		<connection>scm:git:ssh://github.com/${repo.user}/${repo.name}.git</connection>
-		<developerConnection>scm:git:ssh://github.com/${repo.user}/${repo.name}.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
 
 	<!-- Use Github's builtin issue management system -->
 	<issueManagement>
@@ -771,80 +818,6 @@
 		</extensions>
 		
 	</build>
-	
-	<!-- TODO:
-	     - master branch: mainline development
-	     - gh-pages: release documentation
-	     - mvn-repo: release maven repo
-	     - github release: standalone pom, jar with deps (lib) or executable jar with deps
-	-->
-	<distributionManagement>
-		<!-- deploy our artifacts (e.g., pom.xml, *.jar) to special Github branch that can be used as a Maven repository -->
-		<!--
-		<repository>
-			<id>internal.repo</id>
-			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/mvn-repo</url>
-		</repository>
-		-->
-		
-		<!--
-		<site>
-			<id>site-docs</id>
-			<name>Temporary Staging Repository for Site</name>
-			<url>file://${project.build.directory}/gh-pages</url>
-		</site>
-		-->
-		<!--
-		<repository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
-		</repository>
-		<site>
-			<id>github</id>
-			<name>Github</name>
-			<url>https://github.com/${repo.user}/${repo.name}.git?gh-pages#</url>
-		</site>
-		-->
-		<!-- deploy our site (e.g., javadocs) to special Github branch used to host static web content (e.g., .html and .js, but no .php) -->
-		<!--<site>
-			<id>gh-pages</id>
-			<name>Maven Site Deployment</name>-->
-			<!--<url>github:http://${repo.user}.github.io/${repo.name}/</url>-->
-			<!--<url>git:ssh://git@github.com/${repo.user}/${repo.name}.git?gh-pages#</url>-->
-		<!--</site>-->
-		
-		<repository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
-			<uniqueVersion>false</uniqueVersion>
-			<layout>default</layout>
-        </repository>
-        <!--
-        <snapshotRepository>
-			<id>github</id>
-			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
-			<uniqueVersion>false</uniqueVersion>
-			<layout>default</layout>
-        </snapshotRepository>
-        -->
-        <site>
-			<id>gh-pages</id>
-			<name>Github</name>
-			<url>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</url>
-		</site>
-    </distributionManagement>
-    <!--
-    <repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-    </repositories>
-	-->
 	
 	<reporting>
 		<plugins>
