@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.6</version>
+	<version>0.0.7-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>InnovAnon</name>
@@ -83,7 +83,7 @@
 		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<connection>scm:git:ssh://github.com/${repo.user}/${repo.name}.git</connection>
 		<developerConnection>scm:git:ssh://github.com/${repo.user}/${repo.name}.git</developerConnection>
-	  <tag>ia-0.0.6</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<!-- Use Github's builtin issue management system -->
