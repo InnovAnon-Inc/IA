@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.8</version>
 	<packaging>pom</packaging>
 
 	<!-- Projects are hosted on Github -->
@@ -15,7 +15,7 @@
 		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>ia-0.0.8</tag>
 	</scm>
 	
 	<!-- TODO:
@@ -37,8 +37,8 @@
 			<id>github</id>
 			<name>GitHub</name>
 			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
-			<uniqueVersion>false</uniqueVersion>
-			<layout>default</layout>
+			<!--<uniqueVersion>false</uniqueVersion>
+			<layout>default</layout>-->
         </repository>
         <!--
         <snapshotRepository>
