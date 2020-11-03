@@ -36,8 +36,8 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub</name>
-			<!--<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>-->
-			<url>scm:git:ssh://git@maven.pkg.github.com/${repo.user}/${repo.name}.git</url>
+			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
+			<!--<url>scm:git:ssh://git@maven.pkg.github.com/${repo.user}/${repo.name}.git</url>-->
 			<!--<url>https://maven.pkg.github.com/${repo.user}</url>-->
 			<!--<uniqueVersion>false</uniqueVersion>
 			<layout>default</layout>-->
@@ -644,6 +644,25 @@
 						</checkModificationExcludes>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 					</configuration>
+					<!--
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>${maven-scm-provider-gitexe.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-scm</artifactId>
+							<version>${wagon-scm.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-manager-plexus</artifactId>
+							<version>${maven-scm-manager-plexus.version}</version>
+						</dependency>
+					</dependencies>
+					-->
 				</plugin>
 
 				<!--
@@ -743,7 +762,7 @@
 							<version>${wagon-git.version}</version>
 						</dependency>
 						-->
-						 <dependency>
+						<dependency>
 							<groupId>org.apache.maven.scm</groupId>
 							<artifactId>maven-scm-provider-gitexe</artifactId>
 							<version>${maven-scm-provider-gitexe.version}</version>
@@ -768,17 +787,36 @@
 					</dependencies>
 				</plugin>
 				
-				<!--
+				
 				<plugin>
 					<inherited>true</inherited>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
 					<version>${maven-deploy-plugin.version}</version>
 					<configuration>
-						<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+						<!--<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>-->
 					</configuration>
+					<!--
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-gitexe</artifactId>
+							<version>${maven-scm-provider-gitexe.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.wagon</groupId>
+							<artifactId>wagon-scm</artifactId>
+							<version>${wagon-scm.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-manager-plexus</artifactId>
+							<version>${maven-scm-manager-plexus.version}</version>
+						</dependency>
+					</dependencies>
+					-->
 				</plugin>
-				-->
+				
 				<!--
 				<plugin>
 					<inherited>true</inherited>
