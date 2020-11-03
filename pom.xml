@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.11-SNAPSHOT</version>
+	<version>0.0.11</version>
 	<packaging>pom</packaging>
 
 	<!-- Projects are hosted on Github -->
@@ -15,7 +15,7 @@
 		<url>https://github.com/${repo.user}/${repo.name}</url>
 		<connection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/${repo.user}/${repo.name}.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>ia-0.0.11</tag>
 	</scm>
 	
 	<!-- TODO:
@@ -36,7 +36,8 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub</name>
-			<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>
+			<!--<url>https://maven.pkg.github.com/${repo.user}/${repo.name}</url>-->
+			<url>scm:git:ssh://git@maven.pkg.github.com/${repo.user}/${repo.name}.git</url>
 			<!--<url>https://maven.pkg.github.com/${repo.user}</url>-->
 			<!--<uniqueVersion>false</uniqueVersion>
 			<layout>default</layout>-->
@@ -757,12 +758,13 @@
 							<artifactId>maven-scm-manager-plexus</artifactId>
 							<version>${maven-scm-manager-plexus.version}</version>
 						</dependency>
-						
+						<!--
 						<dependency>
 							<groupId>org.apache.maven.wagon</groupId>
 							<artifactId>wagon-http</artifactId>
 							<version>${wagon-http.version}</version>
 						</dependency>
+						-->
 					</dependencies>
 				</plugin>
 				
@@ -823,12 +825,13 @@
 				<artifactId>maven-scm-provider-gitexe</artifactId>
 				<version>${maven-scm-provider-gitexe.version}</version>
 			</extension>
-			
+			<!--
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-http</artifactId>
 				<version>${wagon-http.version}</version>
 			</extension>
+			-->
 		</extensions>
 		
 	</build>
