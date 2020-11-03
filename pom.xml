@@ -4,7 +4,7 @@
 
 	<groupId>com.innovanon</groupId>
 	<artifactId>ia</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>InnovAnon</name>
@@ -822,6 +822,7 @@
 			<uniqueVersion>false</uniqueVersion>
 			<layout>default</layout>
         </repository>
+        <!--
         <snapshotRepository>
 			<id>github</id>
 			<name>GitHub</name>
@@ -829,6 +830,7 @@
 			<uniqueVersion>false</uniqueVersion>
 			<layout>default</layout>
         </snapshotRepository>
+        -->
         <site>
 			<id>gh-pages</id>
 			<name>Github</name>

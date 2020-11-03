@@ -9,7 +9,14 @@
 		<server>
 			<id>gh-pages</id>
 			<username>git</username>
-			<password>${env.GITHUB_API_KEY}</password>
+			<configuration>
+				<scmVersionType>branch</scmVersionType>
+				<scmVersion>gh-pages</scmVersion>
+			</configuration>
+		</server>
+		<server>
+			<id>your.keyname</id>
+			<passphrase></passphrase>
 		</server>
 	</servers>
 </settings>

@@ -1,27 +1,6 @@
 version: 2.1
 
-#orbs:
-#  maven: circleci/maven@1.0.3
-#
-#workflows:
-#  parallel_test:
-#    jobs:
-#      - maven/test: # checkout, build, test, and upload test results
-#          command: '-X verify'
-#    branches:
-#      ignore:
-#        - gh-pages
-#        - mvn-repo
-
 jobs:
-  #cache:
-  #  docker:
-  #    - image: circleci/openjdk:stretch
-  #  steps:
-  #    - checkout
-  #    - run: |
-  #        echo -e "$GPG_KEY" | gpg --import
-  #        mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
   test:
     docker:
       - image: circleci/openjdk:stretch
@@ -54,19 +33,11 @@ jobs:
       - run: |
           echo -e "$GPG_KEY" | gpg --import
           mvn -e -s .circleci/settings.xml -DskipTests --batch clean compile release:prepare release:perform
+
 workflows:
   version: 2.0
   do_everything:
     jobs:
-      #- cache:
-      #    filters:
-      #      branches:
-      #        ignore:
-      #          - gh-pages
-      #          - mvn-repo
-      #- test:
-      #    requires:
-      #      - cache
       - test:
           filters:
             branches:
